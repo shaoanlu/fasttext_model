@@ -1,7 +1,9 @@
 #fasttext model
-Train a fasttext moedel using IMBD reviews text file form Kaggle tutorial. https://www.kaggle.com/c/word2vec-nlp-tutorial
+Train a fasttext moedel using IMBD reviews text file
 
-Two fasttext pretrained models can be found in the model directory.
+To run BoW.py, please download .tsv data form Kaggle tutorial. https://www.kaggle.com/c/word2vec-nlp-tutorial
+
+Also, two fasttext pretrained models can be found in the model directory.
 ##Requirements 
 
 python2.7, fasttext 0.8.3
