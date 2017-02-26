@@ -69,7 +69,7 @@ print "Parsing sentences from unlabeled set"
 for review in unlabeled_train["review"]:
     sentences += review_to_sentences(review, tokenizer)
 
-# Create a .csv file for model trinaing
+# Create a .csv file for model training
 import csv
 with open("temp.csv",'w') as file:
     fw = csv.writer(file) #csv.writer(myfile, quoting=csv.QUOTE_ALL)?
@@ -82,8 +82,8 @@ with open("sentences.csv", "w") as file:
 
 import fasttext
 # fasttext package provides 2 models, CBOW and Skipgram
-#model = fasttext.cbow("sentences3.csv",'model', min_count=40, dim=100, ws=10)
-model = fasttext.skipgram("sentences3.csv",'model', min_count=40, dim=100, ws=10)
+#model = fasttext.cbow("sentences.csv",'model', min_count=40, dim=100, ws=10)
+model = fasttext.skipgram("sentences.csv",'model', min_count=40, dim=100, ws=10)
 """
 # import gensim to load movel.vec
 from gensim.models import word2vec
