@@ -1,1 +1,7 @@
+file name specifying model params. as in https://pypi.python.org/pypi/fasttext
 
+dim: size of word vectors 
+
+min_count: minimal number of word occurences
+
+ws: size of the context window
