@@ -1,3 +1,4 @@
+# From https://www.kaggle.com/c/word2vec-nlp-tutorial#part-2-word-vectors
 import pandas as pd
 
 # Read data from files 
@@ -68,7 +69,7 @@ print "Parsing sentences from unlabeled set"
 for review in unlabeled_train["review"]:
     sentences += review_to_sentences(review, tokenizer)
 
-# List 2 .csv
+# Create a .csv file for model trinaing
 import csv
 with open("temp.csv",'w') as file:
     fw = csv.writer(file) #csv.writer(myfile, quoting=csv.QUOTE_ALL)?
@@ -78,106 +79,14 @@ with open("temp.csv",'r') as file:
 with open("sentences.csv", "w") as file:
     file.write(y)
 
-"""
-# cleaning stopwords in sentences to compress .csv size
-%cd O:\pythonTest\IPython
-import csv
-from gensim.parsing.preprocessing import STOPWORDS
-
-with open("sentences3.csv",'r') as file:
-    y = file.read().replace(" the ","")
-    for stopword in STOPWORDS:
-        y = y.replace(" "+stopword+" "," ")
-
-
-with open("sentences4.csv", "w") as file:
-    file.write(y)
-"""
-
 
 import fasttext
-
-model = fasttext.cbow("sentences.csv",'model',min_count=30,dim=60)
+# fasttext package provides 2 models, CBOW and Skipgram
+#model = fasttext.cbow("sentences3.csv",'model', min_count=40, dim=100, ws=10)
+model = fasttext.skipgram("sentences3.csv",'model', min_count=40, dim=100, ws=10)
 """
-#http://qiita.com/HirofumiYashima/items/be94421837b733ea1da2
-most_similar()
-similarity is determined by inner product
-import numpy as np
-car = m['car']
-truck = m['truck']
-car_n = car/np.linalg.norm(car)
-truck_n = truck/np.linalg.norm(truck)
-
-print np.dot(car_n,truck_n)
-print m.most_similar['car']
-"""
-
-"""
-%cd O:\pythonTest\IPython
+# import gensim to load movel.vec
 from gensim.models import word2vec
-from gensim.parsing import PorterStemmer
-model = word2vec.Word2Vec.load_word2vec_format("modelSkipgram_100dim_40minCount_10ws.vec")
-#model = word2vec.Word2Vec.load_word2vec_format("modelCBOW_400minCount_100dim_10ws.vec")
-#model = word2vec.Word2Vec.load("300features_40minwords_10context.gensim")
-modelCBOW_400minCount_100dim_10ws.vec
-#model.most_similar("car")
-
-#
-einstein = model['einstein']
-genius = model['genius']
-#model.similar_by_vector(model['einstein'] - model['genius'])
-model.similar_by_vector(einstein - genius)
-stemmer = PorterStemmer()
-stemmer.stem()
-
-
-#from sklearn.manifold import TSNE
-from sklearn.decomposition import PCA
-x = model[model.vocab]
-x_pca = PCA().fit_transform(x)
-
-similarList = model.most_similar("example")
-words = []
-X=[]
-Y=[]
-Z=[]
-words.append("example")
-index = model.vocab.keys().index("example")
-X.append(x_pca[index,0])
-Y.append(x_pca[index,1])
-for word,similarity in similarList:
-    index = model.vocab.keys().index(word)
-    words.append(word)
-    X.append(x_pca[index,0])
-    Y.append(x_pca[index,1])
-
-
-
-import matplotlib.pyplot as plt
-fig,p = plt.subplots()
-p.scatter(X, Y)
-for i,txt in enumerate(words):
-    p.annotate(txt,(X[i],Y[i]))
-
-fig.tight_layout()
-fig.show()
-fig.savefig('temp.png', dpi=fig.dpi)
-
-similarList = model.most_similar("example")
-words = []
-x = []
-words.append("example")
-index = model.vocab.keys().index("example")
-x.append(model["example"])
-for word,similarity in similarList:
-    words.append(word)
-    x.append(model[word])
-    
-for i,txt in enumerate(words):
-    p.annotate(txt,x_tsne_n[i])
-
-x_tsne = TSNE(n_components=2).fit_transform(x)
-import matplotlib.pyplot as plt
-
+model = word2vec.Word2Vec.load_word2vec_format("model.vec")
+model.most_similar("car")
 """
-
