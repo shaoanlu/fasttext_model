@@ -71,13 +71,9 @@ for review in unlabeled_train["review"]:
 
 # Create a .csv file for model training
 import csv
-with open("temp.csv",'w') as file:
-    fw = csv.writer(file) #csv.writer(myfile, quoting=csv.QUOTE_ALL)?
+with open("sentences.csv",'w') as file:
+    fw = csv.writer(file, delimiter=' ') #csv.writer(myfile, quoting=csv.QUOTE_ALL)?
     fw.writerows(sentences)
-with open("temp.csv",'r') as file:
-	y = file.read().replace(","," ")
-with open("sentences.csv", "w") as file:
-    file.write(y)
 
 
 import fasttext
