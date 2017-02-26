@@ -72,7 +72,7 @@ for review in unlabeled_train["review"]:
 # Create a .csv file for model training
 import csv
 with open("sentences.csv",'w') as file:
-    fw = csv.writer(file, delimiter=' ') #csv.writer(myfile, quoting=csv.QUOTE_ALL)?
+    fw = csv.writer(file, delimiter=' ')
     fw.writerows(sentences)
 
 
